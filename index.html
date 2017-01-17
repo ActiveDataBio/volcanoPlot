@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css"/>
+    <link rel="stylesheet" href="css/volcano.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jspanel3/3.5.0/jquery.jspanel.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.1/d3.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspanel3/3.5.0/jquery.jspanel-compiled.min.js"></script>
+    <script src="js/bio.volcanoplot.js"></script>
+  </head>
+  <body style="overflow-y:hidden;">
+    <div class="ui top attached menu">
+      <div class="right menu">
+        <!-- div id="voroni_checkbox" class="ui item center aligned checkbox">
+          <input type="checkbox" name="voroni">
+          <label>Hide Voroni</label>
+        </div-->
+        <div id="refresh_btn" class="ui icon button">
+          <i class="refresh icon"></i>
+        </div>
+        <select id="drop" class="ui item dropdown">
+          <option value="">Choose Dataset</option>
+          <option value="protein">Thor2 protein stat values</option>
+          <option value="phospho">Thor2 phospho stat values</option>
+        </select>
+      </div>
+    </div>
+    <div class="ui bottom attached segment">
+      <svg id="chart"></svg>
+    </div>
+    <script>
+    	$(document).ready(function(){
+    	  $('#drop').dropdown({
+    	    onChange: function(value, text, $selectedItem) {
+    	      d3.select('#chart > *').remove();
+    	      //$('#voroni_checkbox').checkbox('uncheck');
+    	      new BioVolcano(d3.select('#chart'),'data/Thor2_'+value+'_statvalues.csv');
+    	    }
+    	  })
+    	  //new BioVolcano(d3.select('#chart'),'data/Thor2_protein_statvalues.csv');
+    	  //new BioVolcano(d3.select('#chart'),'data/Thor2_phospho_statvalues.csv');
+    	});    
+    </script>
+  </body>
+</html>

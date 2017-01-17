@@ -1,0 +1,8 @@
+.scatter circle {
+    opacity:.5;
+    cursor:pointer;
+}
+
+.scatter circle.significant {
+    opacity:1
+}
